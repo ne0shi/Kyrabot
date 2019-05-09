@@ -107,7 +107,8 @@ async def help(ctx, entity=client):
           f'╰[?ban @member]━[Bans member from server]\n' \
           f'╰[?jail @member]━[Sends member to #jail until unjailed]\n' \
           f'╰[?unjail @member]━[Unjails member and lets them talk in other channels again]\n' \
-        f'╰[?creds ]━[THE ONE ]\n'
+        f'╰[?creds ]━[THE ONE ]\n'\
+        f'╰[?clearall ]━[Deletes all the messages in the channel ]\n'
         embed = discord.Embed(title='Test Help Menu ＼(≧▽≦)／', description=msg, color=0xFF69B4)
         await ctx.send(embed=embed)
 
