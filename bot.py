@@ -20,7 +20,7 @@ async def on_member_remove(member):
 
 @client.command()
 @commands.has_role("Amats")
-async def clear(ctx, amount="None"):
+async def clear(ctx, amount=0):
    if amount == "all":
         amount = 5000
         await ctx.channel.purge(limit=amount)
@@ -28,7 +28,7 @@ async def clear(ctx, amount="None"):
         await ctx.send(embed=embed)
         return amount
         
-   if amount == "None":
+   if amount == 0:
        embed = discord.Embed(title='Fail',description='Please specify how many messages you wanna delete', color=0xFF69B4)
        await ctx.send(embed=embed)
        return amount
@@ -38,7 +38,6 @@ async def clear(ctx, amount="None"):
    await ctx.send(embed=embed)
 
 @client.command()
-@commands.has_role("Member")
 async def heh(ctx):
     await ctx.send('Shutup Lux')
 @client.command()
@@ -93,7 +92,6 @@ async def unjail(ctx, user: discord.Member=None):
     await user.add_roles(role2)
     await ctx.send(embed=embed)
 @client.command()
-@commands.has_role("Members")
 async def creds(ctx):
     embed = discord.Embed(title="Credits", description="A very huge applause to Luxunator for letting me copy his script which was actually awesome by the way ", color=0xFF69B4)
     await ctx.send(embed=embed)
@@ -104,7 +102,7 @@ async def help(ctx, entity=client):
         f'╰[?help]━[Shows Bot Help Menu]\n' \
           f'' \
           f'┌━━━━━━━━[Mod Commands]━━━━━━━━\n' \
-          f'╰[?clear (#_of_messages/all)]━[Deletes the last # of messages in the channel]\n' \
+          f'╰[?clear (#_of_messages)]━[Deletes the last # of messages in the channel]\n' \
           f'╰[?kick @member]━[Kicks member from server]\n' \
           f'╰[?ban @member]━[Bans member from server]\n' \
           f'╰[?jail @member]━[Sends member to #jail until unjailed]\n' \
@@ -113,7 +111,12 @@ async def help(ctx, entity=client):
         embed = discord.Embed(title='Test Help Menu ＼(≧▽≦)／', description=msg, color=0xFF69B4)
         await ctx.send(embed=embed)
 
-
+@client.command()
+async def clearall(ctx, amount=5000):
+        await ctx.channel.purge(limit=amount)
+        embed =  discord.Embed(title='Cleaning',description = 'You have cleared everything', color=0xFF69B4)
+        await ctx.send(embed=embed)
+        return amount
 
 
 client.run('NTc0ODAzMTc1MDAyMDc5MjMz.XNLDGw.K05YQuITnYZZ-f-lnYSOm2ZglJ8')
