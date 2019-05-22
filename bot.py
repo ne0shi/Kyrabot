@@ -52,11 +52,6 @@ async def ban(ctx, user: discord.Member='None'):
     await ctx.send(embed=embed)
 @client.command()
 @commands.has_role("Amats")
-async def unban(ctx, user: discord.User):
-    await ctx.guild.unban(user)
-    await ctx.channel.send('{} just got unbanned from the server eh'.format(user))
-@client.command()
-@commands.has_role("Amats")
 async def kick(ctx, user: discord.Member=None):
     embed = discord.Embed(title="Bye Bye :wave:", description="{} got kicked from the server".format(user), color=0xFF69B4)
     if not user:
@@ -118,6 +113,20 @@ async def clearall(ctx, amount=5000):
         embed =  discord.Embed(title='Cleaning',description = 'You have cleared everything', color=0xFF69B4)
         await ctx.send(embed=embed)
         return amount
+
+@client.command()
+async def unban(ctx, *, member):
+    embed = discord.Embed(title='Unbanned', description='Congratulations, you have been unbanned {member}', color=0xFF69B4)
+    banned_users = ctx.guild.bans()
+    member_name, member_discriminator = member.split('#')
+    for ban_entry in banned_users:
+        user = ban_entry.user
+        if (user.name, user.discriminator) == (member_name, member_discriminator):
+            await ctx.guild.unban(user)
+            await ctx.send(embed=embed)
+            
+            
+
 
 
 client.run('NTc0ODAzMTc1MDAyMDc5MjMz.XNLDGw.K05YQuITnYZZ-f-lnYSOm2ZglJ8')
