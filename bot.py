@@ -10,7 +10,16 @@ async def on_member_join(member):
     await channel.send(embed=embed)
     role = discord.utils.get(member.guild.roles, name ="Members")
     await member.add_roles(role)
-
+    embed = discord.Embed(title="{}'s info".format(member.name), description="Test", color=0xFF69B4)
+    embed.add_field(name="Name", value=member.name, inline=True)
+    embed.add_field(name="ID", value=member.id, inline=True)
+    embed.add_field(name="Status", value=member.status, inline=True)
+    embed.add_field(name="Roles", value=member.top_role)
+    embed.add_field(name="Joined", value=member.joined_at)
+    embed.add_field(name="Created", value=member.created_at)
+    embed.set_thumbnail(url=member.avatar_url)
+    channel = discord.utils.get(member.guild.channels, name = "info")
+    await channel.send(embed=embed)
 @client.event
 async def on_ready():
     print('Bot is ready.')
@@ -124,13 +133,7 @@ async def unban(ctx, *, member):
             await ctx.guild.unban(user)
             embed = discord.Embed(title='Unbanned',description = 'Congratulations, you have been unbanned {}'.format(user.mention), color=0xFF69B4)
             await ctx.send(embed=embed)
-@client.command()
-@commands.has_role('Amats')        
-async def banlist(ctx):
-    banned_users = await ctx.guild.bans()
-    embed = discord.Embed(title='Banlist',description = 'The banlist {}'.format(banned_users))
-    await ctx.send(embed=embed)
-    return
+
             
 
 
