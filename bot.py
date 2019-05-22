@@ -116,15 +116,21 @@ async def clearall(ctx, amount=5000):
 
 @client.command()
 async def unban(ctx, *, member):
-    embed = discord.Embed(title='Unbanned', description='Congratulations, you have been unbanned {member}', color=0xFF69B4)
-    banned_users = ctx.guild.bans()
+    banned_users = await ctx.guild.bans()
     member_name, member_discriminator = member.split('#')
     for ban_entry in banned_users:
         user = ban_entry.user
         if (user.name, user.discriminator) == (member_name, member_discriminator):
             await ctx.guild.unban(user)
+            embed = discord.Embed(title='Unbanned',description = 'Congratulations, you have been unbanned {}'.format(user.mention), color=0xFF69B4)
             await ctx.send(embed=embed)
-            
+@client.command()
+@commands.has_role('Amats')        
+async def banlist(ctx):
+    banned_users = await ctx.guild.bans()
+    embed = discord.Embed(title='Banlist',description = 'The banlist {}'.format(banned_users))
+    await ctx.send(embed=embed)
+    return
             
 
 
