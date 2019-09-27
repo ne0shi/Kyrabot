@@ -97,7 +97,7 @@ async def unjail(ctx, user: discord.Member=None):
     await ctx.send(embed=embed)
 @client.command()
 async def creds(ctx):
-    embed = discord.Embed(title="Credits", description="A very huge applause to Luxunator for letting me copy his script which was actually awesome by the way ", color=0xFF69B4)
+    embed = discord.Embed(title="Credits", description="A very huge applause to Luxunator ", color=0xFF69B4)
     await ctx.send(embed=embed)
 
 @client.command()
