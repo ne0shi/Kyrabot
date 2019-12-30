@@ -138,5 +138,5 @@ async def unban(ctx, *, member):
 
 
 
-client.run('NTc0ODAzMTc1MDAyMDc5MjMz.XNLDGw.K05YQuITnYZZ-f-lnYSOm2ZglJ8')
+client.run('ENTER API KEY HERE')
 
